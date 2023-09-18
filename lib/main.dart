@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:math_app/ads_screen.dart';
 import 'package:math_app/find_normal_screen.dart';
 import 'package:math_app/gauss_method_screen.dart';
