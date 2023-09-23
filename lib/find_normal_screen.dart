@@ -20,11 +20,13 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Нормаль к плоскости"), actions: [
-        IconButton(onPressed: () {
-          vector1Cont.clear();
-          vector2Cont.clear();
-          ref.read(sendListsProvider.notifier).clearNormalStates();
-        }, icon: const Icon(Icons.refresh)),
+        IconButton(
+            onPressed: () {
+              vector1Cont.clear();
+              vector2Cont.clear();
+              ref.read(sendListsProvider.notifier).clearNormalStates();
+            },
+            icon: const Icon(Icons.refresh)),
       ]),
       body: SingleChildScrollView(
         child: Padding(
@@ -41,7 +43,8 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                     borderRadius: BorderRadius.circular(16)),
                 child: TextFormField(
                   controller: vector1Cont,
-                  keyboardType: TextInputType.number,
+                  keyboardType: const TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
                   textInputAction: TextInputAction.next,
                   onEditingComplete: () {
                     FocusManager.instance.primaryFocus?.unfocus();
@@ -51,8 +54,7 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                     List<String> list1 = vector1Cont.text.split(" ");
                     List<String> list2 = vector2Cont.text.split(" ");
 
-                    if (list1.length >= 3 &&
-                        list2.length >= 3) {
+                    if (list1.length >= 3 && list2.length >= 3) {
                       ref
                           .read(sendListsProvider.notifier)
                           .findNormal(list1, list2);
@@ -138,8 +140,7 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                     List<String> list1 = vector1Cont.text.split(" ");
                     List<String> list2 = vector2Cont.text.split(" ");
 
-                    if (list1.length >= 3 &&
-                        list2.length >= 3) {
+                    if (list1.length >= 3 && list2.length >= 3) {
                       ref
                           .read(sendListsProvider.notifier)
                           .findNormal(list1, list2);
