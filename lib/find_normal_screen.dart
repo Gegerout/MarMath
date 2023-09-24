@@ -133,7 +133,8 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                     borderRadius: BorderRadius.circular(16)),
                 child: TextFormField(
                   controller: vector2Cont,
-                  keyboardType: TextInputType.number,
+                  keyboardType: const TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
                   textInputAction: TextInputAction.done,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
