@@ -10,6 +10,7 @@ class SendListsNotifier extends ChangeNotifier {
   List<dynamic> result = [];
   List<dynamic> actions = [];
   List<dynamic> normalResult = [];
+  String codeResult = "";
   img.Image? imageCode;
 
   Future<void> getAnswers(
@@ -31,6 +32,12 @@ class SendListsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> compileCode(String code) async {
+    final data = await Api().compileCode(code);
+    codeResult = data;
+    notifyListeners();
+  }
+
   void clearGaussStates() {
     result = [];
     actions = [];
@@ -40,6 +47,11 @@ class SendListsNotifier extends ChangeNotifier {
   void clearNormalStates() {
     normalResult = [];
     imageCode = null;
+    notifyListeners();
+  }
+
+  void clearCodeStates() {
+    codeResult = "";
     notifyListeners();
   }
 }
