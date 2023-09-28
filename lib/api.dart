@@ -22,4 +22,14 @@ class Api {
 
     return [res.data["result"], res.data["image"]];
   }
+
+  Future<String> compileCode(String code) async {
+    final Dio dio = Dio();
+
+    final res = await dio.post("http://evgeniymuravyov.pythonanywhere.com/compile_code", data: {
+      "code": code,
+    });
+
+    return res.data["result"];
+  }
 }
