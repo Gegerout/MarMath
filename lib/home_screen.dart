@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_app/compile_code_screen.dart';
 import 'package:math_app/find_normal_screen.dart';
 import 'package:math_app/gauss_method_screen.dart';
 
@@ -12,7 +13,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List screens = [
     const GaussMethodScreen(),
-    const FindNormalScreen()
+    const FindNormalScreen(),
+    const CompileCodeScreen()
   ];
 
   int currentIndex = 0;
@@ -36,6 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.compare_arrows),
             label: 'Нормали',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.play_arrow),
+            label: 'Компилятор',
           ),
         ],
         currentIndex: currentIndex,
