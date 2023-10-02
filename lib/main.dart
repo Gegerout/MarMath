@@ -42,7 +42,7 @@ class MyApp extends ConsumerWidget {
       ),
       home: const Scaffold(
         resizeToAvoidBottomInset: false,
-        body: CompileCodeScreen(),
+        body: HomeScreen(),
     // Column(
         //   children: [
         //     Row(
