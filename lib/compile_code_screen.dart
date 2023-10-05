@@ -45,19 +45,22 @@ class _CompileCodeScreenState extends ConsumerState<CompileCodeScreen> {
             icon: const Icon(Icons.refresh)),
       ]),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CodeField(
-              controller: _codeController!,
-              textStyle: const TextStyle(fontSize: 20),
-            ),
-            const SizedBox(height: 30),
-            ref.watch(sendListsProvider).codeResult == "" ? Container() : const Text("Вывод", style: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.w500)),
-            const SizedBox(height: 10),
-            Text(ref.watch(sendListsProvider).codeResult, style: const TextStyle(
-                fontSize: 24, fontWeight: FontWeight.w400))
-          ],
+        child: TapRegion(
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          child: Column(
+            children: [
+              CodeField(
+                controller: _codeController!,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 30),
+              ref.watch(sendListsProvider).codeResult == "" ? Container() : const Text("Вывод", style: TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.w500)),
+              const SizedBox(height: 10),
+              Text(ref.watch(sendListsProvider).codeResult, style: const TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.w400))
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
