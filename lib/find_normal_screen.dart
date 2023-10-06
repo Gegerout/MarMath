@@ -16,6 +16,9 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
   TextEditingController vector1Cont = TextEditingController();
   TextEditingController vector2Cont = TextEditingController();
 
+  bool isFocused1 = false;
+  bool isFocused2 = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +27,10 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
             onPressed: () {
               vector1Cont.clear();
               vector2Cont.clear();
+              setState(() {
+                isFocused1 = false;
+                isFocused2 = false;
+              });
               ref.read(sendListsProvider.notifier).clearNormalStates();
             },
             icon: const Icon(Icons.refresh)),
@@ -41,10 +48,24 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                   height: 60,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent, width: 2),
+                      border: Border.all(
+                          color: isFocused1 ? Colors.blueAccent : Colors.grey,
+                          width: 2),
                       borderRadius: BorderRadius.circular(16)),
                   child: TextFormField(
                     controller: vector1Cont,
+                    onTap: () {
+                      setState(() {
+                        isFocused1 = true;
+                      });
+                    },
+                    onTapOutside: (pos) {
+                      if(vector1Cont.text.isEmpty) {
+                        setState(() {
+                          isFocused1 = false;
+                        });
+                      }
+                    },
                     keyboardType: const TextInputType.numberWithOptions(
                         signed: true, decimal: true),
                     textInputAction: TextInputAction.next,
@@ -131,10 +152,24 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                   height: 60,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent, width: 2),
+                      border: Border.all(
+                          color: isFocused2 ? Colors.blueAccent : Colors.grey,
+                          width: 2),
                       borderRadius: BorderRadius.circular(16)),
                   child: TextFormField(
                     controller: vector2Cont,
+                    onTap: () {
+                      setState(() {
+                        isFocused2 = true;
+                      });
+                    },
+                    onTapOutside: (pos) {
+                      if(vector2Cont.text.isEmpty) {
+                        setState(() {
+                          isFocused2 = false;
+                        });
+                      }
+                    },
                     keyboardType: const TextInputType.numberWithOptions(
                         signed: true, decimal: true),
                     textInputAction: TextInputAction.done,
