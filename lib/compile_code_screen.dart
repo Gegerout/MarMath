@@ -53,13 +53,21 @@ class _CompileCodeScreenState extends ConsumerState<CompileCodeScreen> {
               const SizedBox(height: 30),
               ref.watch(sendListsProvider).codeResult == ""
                   ? Container()
-                  : const Text("Вывод",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
-              const SizedBox(height: 10),
-              Text(ref.watch(sendListsProvider).codeResult,
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.w400))
+                  : ref.watch(sendListsProvider).codeResult == "Loading"
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Column(
+                          children: [
+                            const Text("Вывод",
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w500)),
+                            const SizedBox(height: 10),
+                            Text(ref.watch(sendListsProvider).codeResult,
+                                style: const TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w400))
+                          ],
+                        ),
             ],
           ),
         ),
