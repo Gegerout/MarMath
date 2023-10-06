@@ -78,7 +78,7 @@ class _GaussMethodScreenState extends ConsumerState<GaussMethodScreen> {
                 ref.watch(sendListsProvider).result.isEmpty
                     ? Container()
                     : ref.watch(sendListsProvider).result[0] == "Loading"
-                    ? const CircularProgressIndicator()
+                    ? const Center(child: CircularProgressIndicator())
                     : Column(
                   children: [
                     const Text(

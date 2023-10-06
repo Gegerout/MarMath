@@ -216,42 +216,55 @@ class _FindNormalScreenState extends ConsumerState<FindNormalScreen> {
                 const SizedBox(height: 30),
                 ref.watch(sendListsProvider).normalResult.isEmpty
                     ? Container()
-                    : const Text(
-                        "Координаты нормали",
-                        style:
-                            TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-                      ),
-                SizedBox(
-                  height: 50,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: ref.watch(sendListsProvider).normalResult.length,
-                      itemBuilder: (context, index) => Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                ref
-                                    .watch(sendListsProvider)
-                                    .normalResult[index]
-                                    .toString(),
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w400),
+                    : ref.watch(sendListsProvider).normalResult[0] == "Loading"
+                        ? const Center(child: CircularProgressIndicator())
+                        : Column(
+                            children: [
+                              const Text(
+                                "Координаты нормали",
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w500),
                               ),
-                            ),
-                          )),
-                ),
-                const SizedBox(height: 30),
-                ref.watch(sendListsProvider).normalResult.isEmpty
-                    ? Container()
-                    : const Text(
-                        "Визуализация",
-                        style:
-                            TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-                      ),
-                ref.watch(sendListsProvider).imageCode == null
-                    ? Container()
-                    : Image.memory(Uint8List.fromList(
-                        img.encodePng(ref.watch(sendListsProvider).imageCode!))),
+                              SizedBox(
+                                height: 50,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: ref
+                                        .watch(sendListsProvider)
+                                        .normalResult
+                                        .length,
+                                    itemBuilder: (context, index) => Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              ref
+                                                  .watch(sendListsProvider)
+                                                  .normalResult[index]
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                        )),
+                              ),
+                              const SizedBox(height: 30),
+                              ref.watch(sendListsProvider).normalResult.isEmpty
+                                  ? Container()
+                                  : const Text(
+                                      "Визуализация",
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                              ref.watch(sendListsProvider).imageCode == null
+                                  ? Container()
+                                  : Image.memory(Uint8List.fromList(
+                                      img.encodePng(ref
+                                          .watch(sendListsProvider)
+                                          .imageCode!))),
+                            ],
+                          ),
               ],
             ),
           ),
