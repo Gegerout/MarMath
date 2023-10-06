@@ -12,6 +12,7 @@ class GaussMethodScreen extends ConsumerStatefulWidget {
 class _GaussMethodScreenState extends ConsumerState<GaussMethodScreen> {
   TextEditingController numbersCont = TextEditingController();
   int tapped = 0;
+  bool isFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +21,35 @@ class _GaussMethodScreenState extends ConsumerState<GaussMethodScreen> {
         IconButton(
             onPressed: () {
               numbersCont.clear();
+              setState(() {
+                isFocused = false;
+              });
               ref.read(sendListsProvider.notifier).clearGaussStates();
             },
             icon: const Icon(Icons.refresh)),
       ]),
       body: SingleChildScrollView(
         child: TapRegion(
-          onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          onTapOutside: (event) {
+            FocusScope.of(context).unfocus();
+            if(ref.watch(sendListsProvider).result.isEmpty) {
+              setState(() {
+                isFocused = false;
+              });
+            }
+          },
+          onTapInside: (event) => setState(() {
+            isFocused = true;
+          }),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent, width: 2),
+                      border: Border.all(
+                          color: isFocused ? Colors.blueAccent : Colors.grey,
+                          width: 2),
                       borderRadius: BorderRadius.circular(16)),
                   child: TextFormField(
                     textInputAction: TextInputAction.newline,
