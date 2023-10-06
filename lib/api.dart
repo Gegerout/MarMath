@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 
 class Api {
@@ -31,5 +33,16 @@ class Api {
     });
 
     return res.data["result"];
+  }
+
+  Future<String> sendWolfram(String input) async {
+    final Dio dio = Dio();
+
+    final res = await dio.post("http://api.wolframalpha.com/v1/simple", queryParameters: {
+      "appid": "K6G3JW-7UPEA57PVT",
+      "layout": "divider",
+      "i": input
+    });
+    return res.data;
   }
 }

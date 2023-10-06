@@ -43,7 +43,7 @@ class MyApp extends ConsumerWidget {
       home: const Scaffold(
         resizeToAvoidBottomInset: false,
         body: HomeScreen(),
-    // Column(
+        // Column(
         //   children: [
         //     Row(
         //       mainAxisAlignment: MainAxisAlignment.spaceAround,
