@@ -21,10 +21,7 @@ class _CompileCodeScreenState extends ConsumerState<CompileCodeScreen> {
   void initState() {
     super.initState();
     _codeController = CodeController(
-      text: source,
-      language: python,
-      stringMap: monokaiSublimeTheme
-    );
+        text: source, language: python, stringMap: monokaiSublimeTheme);
   }
 
   @override
@@ -54,18 +51,26 @@ class _CompileCodeScreenState extends ConsumerState<CompileCodeScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               const SizedBox(height: 30),
-              ref.watch(sendListsProvider).codeResult == "" ? Container() : const Text("Вывод", style: TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.w500)),
+              ref.watch(sendListsProvider).codeResult == ""
+                  ? Container()
+                  : const Text("Вывод",
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
               const SizedBox(height: 10),
-              Text(ref.watch(sendListsProvider).codeResult, style: const TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.w400))
+              Text(ref.watch(sendListsProvider).codeResult,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w400))
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        ref.read(sendListsProvider.notifier).compileCode(_codeController!.text);
-      }, child: const Icon(Icons.play_arrow)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            ref
+                .read(sendListsProvider.notifier)
+                .compileCode(_codeController!.text);
+          },
+          child: const Icon(Icons.play_arrow)),
     );
   }
 }
