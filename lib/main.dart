@@ -43,7 +43,7 @@ class MyApp extends ConsumerWidget {
       ),
       home: const Scaffold(
         resizeToAvoidBottomInset: false,
-        body: CalculatorScreen(),
+        body: HomeScreen(),
         // Column(
         //   children: [
         //     Row(
