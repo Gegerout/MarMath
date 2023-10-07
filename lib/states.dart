@@ -14,6 +14,7 @@ class SendListsNotifier extends ChangeNotifier {
   String codeResult = "";
   img.Image? imageCode;
   img.Image? wolframImage;
+  bool isWolframLoading = false;
 
   Future<void> getAnswers(
       List<dynamic> list1, List<dynamic> list2) async {
@@ -47,8 +48,11 @@ class SendListsNotifier extends ChangeNotifier {
   }
 
   Future<void> sendWolfram(String input) async {
+    isWolframLoading = true;
+    notifyListeners();
     final data = await Api().sendWolfram(input);
     wolframImage = data;
+    isWolframLoading = false;
     notifyListeners();
   }
 

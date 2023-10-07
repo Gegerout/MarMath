@@ -20,13 +20,15 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Калькулятор"), actions: [
-        IconButton(onPressed: () {
-          requestCont.clear();
-          setState(() {
-            isFocused = false;
-          });
-          ref.read(sendListsProvider.notifier).clearWolframStates();
-        }, icon: const Icon(Icons.refresh)),
+        IconButton(
+            onPressed: () {
+              requestCont.clear();
+              setState(() {
+                isFocused = false;
+              });
+              ref.read(sendListsProvider.notifier).clearWolframStates();
+            },
+            icon: const Icon(Icons.refresh)),
       ]),
       body: SingleChildScrollView(
         child: TapRegion(
@@ -65,13 +67,18 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                     ),
                   ),
                 ),
-                ref.watch(sendListsProvider).wolframImage == null
+                const SizedBox(height: 30),
+                ref.watch(sendListsProvider).isWolframLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ref.watch(sendListsProvider).wolframImage == null
                     ? Container()
                     : Image.memory(
-                        Uint8List.fromList(img.encodeGif(
-                            ref.watch(sendListsProvider).wolframImage!)),
-                        gaplessPlayback: true,
-                      ),
+                            Uint8List.fromList(img.encodeGif(
+                                ref.watch(sendListsProvider).wolframImage!)),
+                            gaplessPlayback: true,
+                          ),
                 // Image.network(
                 //         "http://api.wolframalpha.com/v1/simple?appid=K6G3JW-7UPEA57PVT&i=y=cos(x)&layout=divider&fontsize=26"),
               ],
