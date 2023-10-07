@@ -68,4 +68,9 @@ class SendListsNotifier extends ChangeNotifier {
     codeResult = "";
     notifyListeners();
   }
+
+  void clearWolframStates() {
+    wolframImage = null;
+    notifyListeners();
+  }
 }

@@ -47,12 +47,12 @@ class Api {
     //     });
 
     http.Response response = await http.get(
-      Uri.parse("http://api.wolframalpha.com/v1/simple?appid=K6G3JW-7UPEA57PVT&i=y=cos(x)&layout=divider&fontsize=26"),
-      headers: {
-        "Connection": "Keep-Alive",
-        "Keep-Alive": "timeout=5, max=1000"
-      }
-    );
+        Uri.parse(
+            "http://api.wolframalpha.com/v1/simple?appid=K6G3JW-7UPEA57PVT&i=$input&layout=divider&fontsize=26"),
+        headers: {
+          "Connection": "Keep-Alive",
+          "Keep-Alive": "timeout=5, max=1000"
+        });
 
     var image = img.decodeGif(response.bodyBytes);
     return image;
