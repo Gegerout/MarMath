@@ -1,6 +1,6 @@
-import 'dart:typed_data';
-
+import 'package:image/image.dart' as img;
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class Api {
   Future<List<dynamic>> getAnswers(
@@ -36,15 +36,25 @@ class Api {
     return res.data["result"];
   }
 
-  Future<String> sendWolfram(String input) async {
-    final Dio dio = Dio();
+  Future<img.Image?> sendWolfram(String input) async {
+    // final Dio dio = Dio();
+    //
+    // final res = await dio.post("http://api.wolframalpha.com/v1/simple",
+    //     queryParameters: {
+    //       "appid": "K6G3JW-7UPEA57PVT",
+    //       "layout": "divider",
+    //       "i": input
+    //     });
 
-    final res = await dio.post("http://api.wolframalpha.com/v1/simple",
-        queryParameters: {
-          "appid": "K6G3JW-7UPEA57PVT",
-          "layout": "divider",
-          "i": input
-        });
-    return res.data;
+    http.Response response = await http.get(
+      Uri.parse("http://api.wolframalpha.com/v1/simple?appid=K6G3JW-7UPEA57PVT&i=y=cos(x)&layout=divider&fontsize=26"),
+      headers: {
+        "Connection": "Keep-Alive",
+        "Keep-Alive": "timeout=5, max=1000"
+      }
+    );
+
+    var image = img.decodeGif(response.bodyBytes);
+    return image;
   }
 }

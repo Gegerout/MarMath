@@ -13,7 +13,7 @@ class SendListsNotifier extends ChangeNotifier {
   List<dynamic> normalResult = [];
   String codeResult = "";
   img.Image? imageCode;
-  String wolframImage = "";
+  img.Image? wolframImage;
 
   Future<void> getAnswers(
       List<dynamic> list1, List<dynamic> list2) async {
